@@ -429,7 +429,7 @@ def choose_email(EMAIL_CHOSSE):
         return mail
     # 如果EMAIL_CHOSSE不等于1、2、3、4，则打印出提示信息
     else:
-        exit()
+        print('哥们，把你的邮箱接口加上, ok？')
         return None
 def get_emailcode(EMAIL_CHOSSE, mail, max_retries=10, delay=1):
     '''
@@ -475,6 +475,7 @@ def get_emailcode(EMAIL_CHOSSE, mail, max_retries=10, delay=1):
                 time.sleep(delay)
                 retries += 1
                 continue
+
             detail_response = requests.get(f"https://mail.sunls.de/api/detail?uid={uid}")
             html_content = detail_response.json()["__html"]
             match = re.search(r'\b\d{6}\b', html_content)
@@ -491,7 +492,7 @@ def get_emailcode(EMAIL_CHOSSE, mail, max_retries=10, delay=1):
         code = input('输入收到的验证码')
         return code
     else:
-        exit()
+        print('哥们，把你的验证码接口加上, ok？')
         return None
 def get_change_ip():
     m = random.randint(0, 255)
@@ -501,7 +502,7 @@ def get_change_ip():
     randomIP = str(m) + '.' + str(n) + '.' + str(x) + '.' + str(y)
     return randomIP
 def geturl(captcha_token, xid):
-    url = f'https://user.pikpak.me/captcha/v2/spritePuzzle.html?action=POST:/v1/auth/verification&appName=NONE&appid=XBASE&captcha_token={captcha_token}&credittype=1&device_id={xid}&deviceid={xid}&event=xbase-auth-verification&hl=zh-CN&mainHost=user.pikpak.me&platformVersion=NONE&privateStyle=&traceid=&redirect_uri=https://mypikpak.com/loading&state=getcaptcha{str(int(time.time()*1000))}'
+    url = f'https://user.mypikpak.com/captcha/v2/reCaptcha.html?action=POST%3A%2Fv1%2Fauth%2Fverification&appName=NONE&appid=XBASE&captcha_token={captcha_token}&clientVersion=NONE&client_id=YUMx5nI8ZU8Ap8pm&creditkey={captcha_token}&credittype=1&device_id={xid}&deviceid={xid}&event=xbase-auth-verification&hl=zh-CN&mainHost=user.mypikpak.com&platformVersion=NONE&privateStyle=&redirect_uri=https%3A%2F%2Fmypikpak.com%2Floading&state=getcaptcha{str(int(time.time()*1000))}'
     return url
 # 开始主进程
 def main(incode, EMAIL_CHOOSE):
@@ -567,12 +568,16 @@ def main(incode, EMAIL_CHOOSE):
         main(incode, EMAIL_CHOOSE)
         return 0
 if __name__ == '__main__':
+    #设置系统代理
+    #os.environ['HTTP_PROXY'] = 'http://127.0.0.1:7890'
+    #os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:7890'
     print('作者：1930520970 白栀')
-    print('赞助码：https://img.picui.cn/free/2024/06/21/6674e6ca74ab6.jpg')
+    print('赞助码：https://krseoul.imgtbl.com/i/2024/07/24/66a0e82a09d17.png')
+    print("杂货铺：http://47.109.38.135/")
     print('手动获取token版，使用请看运行提示，电信流量可以直接使用，其他的请连外网')
     print('请勿倒卖滥用')
     # 有三个邮箱接口,EMAIL_CHOOSE默认为1,自行测试!!!
-    EMAIL_CHOOSE = 2
+    EMAIL_CHOOSE = 1
     # 获取用户输入的邀请码
     incode = input('请输入邀请码:')
     # 调用main函数，传入邀请码和EMAIL_CHOOSE变量
